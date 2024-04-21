@@ -21,9 +21,22 @@ export async function getBlogs() {
 
 
 export async function getDetails(id: string){
-    console.log('id', id)
     const query = `*[_type == "blog" && _id== "${id}"]`;
 
+    return client.fetch(query, {})
+        .then(res => {
+            console.log('res', res);
+            return res;
+        })
+        .catch(err => {
+            console.log('err', err);
+            return err;
+        });
+}
+
+export async function getAuthor(id:string){
+    const query = `*[_type == "author" && _id== "${id}"]`;
+    console.log('author id', id);
     return client.fetch(query, {})
         .then(res => {
             console.log('res', res);

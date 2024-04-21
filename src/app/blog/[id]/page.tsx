@@ -2,7 +2,7 @@
 'use client';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import { getDetails } from '../../../../sanity-studio/sanity.query';
+import { getAuthor, getDetails } from '../../../../sanity-studio/sanity.query';
 import { PortableText } from '@portabletext/react'
 import imageUrlBuilder from '@sanity/image-url'
 
@@ -11,11 +11,15 @@ export default function ParticularBlogPage() {
 
     const { id }: any = useParams();
     const [blog, setBlogs] = useState({});
+    const [author, setAuthor] = useState({});
     useEffect(() => {
 
         const fun = async () => {
             const blogRes = await getDetails(id);
             console.log('blog', id, blogRes);
+            const author = await getAuthor(blogRes[0]?.author?._ref);
+            console.log('author', author);
+            setAuthor(author[0]);
             setBlogs(blogRes[0]);
 
         }
@@ -52,7 +56,15 @@ export default function ParticularBlogPage() {
                     <p className="text-gray-600 text-sm mb-4">
                         {blog.createdat}
                     </p>
+                <div>
+                    <p>Written by: </p>
+                    <div className='flex items-center'>
+                    <img src={urlFor(author?.authorImage?.asset._ref)} alt="" className='w-10 rounded-full mr-3' />
+                    <p>{author?.title}</p>
+                    </div>
                 </div>
+                </div>
+
             </div>
         </div>
     )
