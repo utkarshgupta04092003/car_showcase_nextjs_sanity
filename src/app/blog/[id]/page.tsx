@@ -36,7 +36,7 @@ export default function ParticularBlogPage() {
             return builder.image(source)
     };
 
-    if (!blog._id) return <div>Loading...</div>
+    if (!blog._id) return <div className='text-grey-200 h-screen text-center mt-72 text-4xl font-bold'>Loading...</div>
 
     return (
         <div className="max-w-4xl mx-auto mt-10">
@@ -46,21 +46,23 @@ export default function ParticularBlogPage() {
                     alt={blog?.title}
                     className="h-64 w-full object-cover"
                 />
-                <div className="p-8">
-                    <h2 className="text-3xl font-semibold mb-4">Title: {blog.title}</h2>
-                    <h3 className="text-xl  mb-4">{blog.metadata}</h3>
+                <div className="p-8 text-justify">
+                    <h2 className="text-3xl font-semibold mb-4">{blog.title}</h2>
+                    <h3 className="text-xs  mb-4">{blog.metadata}</h3> <br />
 
                     <PortableText
                         value={blog.content}
                     />
-                    <p className="text-gray-600 text-sm mb-4">
-                        {blog.createdat}
+                <div className='flex justify-between my-10'>
+                    <p className="text-gray-600 text-sm my-4">
+                        Published on: {blog.createdat?.split('T')[0]}
                     </p>
-                <div>
-                    <p>Written by: </p>
-                    <div className='flex items-center'>
+                    <div className='flex items-end'>
+                    <p className='mr-5'>Written by: </p> 
+                    <div className=''>
                     <img src={urlFor(author?.authorImage?.asset._ref)} alt="" className='w-10 rounded-full mr-3' />
                     <p>{author?.title}</p>
+                    </div>
                     </div>
                 </div>
                 </div>

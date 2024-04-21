@@ -27,7 +27,7 @@ export default function Blog() {
     useEffect(() => {
         const fetchTimer = setTimeout(() => {
             console.log('calling', input);
-            const temp = blogs?.filter((b) => b.title.toLowerCase().includes(input.toLowerCase()));
+            const temp = blogs?.filter((b) => b.title?.toLowerCase().includes(input?.toLowerCase()));
             setFilterBlog(temp);
         }, 1000);
 
@@ -76,7 +76,7 @@ export default function Blog() {
                                 <div className="p-6">
                                     <h2 className="text-xl font-semibold mb-2">{blog.title}</h2>
                                     <p className="text-gray-600 text-sm">
-                                        {blog.createdat}
+                                        {blog.createdat?.split('T')[0]}
                                     </p>
                                     <Link
                                         href={`/blog/${blog._id}`}
