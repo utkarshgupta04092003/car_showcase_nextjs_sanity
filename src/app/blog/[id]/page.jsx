@@ -9,7 +9,7 @@ import imageUrlBuilder from '@sanity/image-url'
 
 export default function ParticularBlogPage() {
 
-    const { id }: any = useParams();
+    const { id } = useParams();
     const [blog, setBlogs] = useState({});
     const [author, setAuthor] = useState({});
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function ParticularBlogPage() {
     }, []);
 
     const builder = imageUrlBuilder({
-        baseUrl: 'https://cdn.sanity.io/',
+        // baseUrl: 'https://cdn.sanity.io',
         projectId: 'f3mkwelj',
         dataset: 'production',
     })
@@ -36,7 +36,7 @@ export default function ParticularBlogPage() {
             return builder.image(source)
     };
 
-    if (!blog._id) return <div className='text-grey-200 h-screen text-center mt-72 text-4xl font-bold'>Loading...</div>
+    if (!blog?._id) return <div className='text-grey-200 h-screen text-center mt-72 text-4xl font-bold'>Loading...</div>
 
     return (
         <div className="max-w-4xl mx-auto mt-10">
